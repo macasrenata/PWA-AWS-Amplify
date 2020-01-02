@@ -2,31 +2,18 @@ import {
   Component,
   ChangeDetectorRef,
   EventEmitter,
-  Output } from '@angular/core';
+  Output,
+  OnInit} from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material';
+import { IosInstallComponent } from './ios-install/ios-install.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'Material PWA';
-  mobileQuery: MediaQueryList;
-  nav = [
-    {
-      title: 'Home',
-      path: '/'
-    },
-    {
-      title: 'My Account (Part 2)',
-      path: '/auth'
-    }
-  ];
-  // tslint:disable-next-line: variable-name
-  private _mobileQueryListener: () => void;
-  @Output() toggleSideNav = new EventEmitter();
+export class AppComponent implements OnInit {
 
   constructor( changeDetectorRef: ChangeDetectorRef, media: MediaMatcher ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -34,6 +21,43 @@ export class AppComponent {
     // tslint:disable-next-line: deprecation
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
+  toast: any;
+  // tslint:disable-next-line:member-ordering
+  title = 'Material PWA';
+    // tslint:disable-next-line:member-ordering
+    mobileQuery: MediaQueryList;
+  // tslint:disable-next-line:member-ordering
+  nav = [
+      {
+        title: 'Home',
+        path: '/'
+      },
+      {
+        title: 'My Account (Part 2)',
+        path: '/auth'
+      }
+    ];
+  // tslint:disable-next-line:member-ordering
+  // tslint:disable-next-line:variable-name
+  private _mobileQueryListener: () => void;
+  @Output() toggleSideNav = new EventEmitter();
+    ngOnInit() {
+      // Detects if device is on iOS
+      const isIos = () => {
+        const userAgent = window.navigator.userAgent.toLowerCase();
+        return /iphone|ipad|ipod/.test( userAgent );
+      };
+      // Detects if device is in standalone mode
+      const isInStandaloneMode = () => ('standalone' in (window as any).navigator) && ((window as any).navigator.standalone);
+      // Checks if should display install popup notification:
+      if (isIos() && !isInStandaloneMode()) {
+        this.toast.openFromComponent(IosInstallComponent, {
+          duration: 8000,
+          horizontalPosition: 'start',
+          panelClass: ['mat-elevation-z3']
+        });
+      }
+    }
 
   toggleMobileNav(nav: MatSidenav) {
     if (this.mobileQuery.matches) {
