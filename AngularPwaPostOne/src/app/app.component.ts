@@ -22,11 +22,8 @@ export class AppComponent implements OnInit {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
   toast: any;
-  // tslint:disable-next-line:member-ordering
   title = 'Material PWA';
-    // tslint:disable-next-line:member-ordering
     mobileQuery: MediaQueryList;
-  // tslint:disable-next-line:member-ordering
   nav = [
       {
         title: 'Home',
@@ -37,8 +34,6 @@ export class AppComponent implements OnInit {
         path: '/auth'
       }
     ];
-  // tslint:disable-next-line:member-ordering
-  // tslint:disable-next-line:variable-name
   private _mobileQueryListener: () => void;
   @Output() toggleSideNav = new EventEmitter();
     ngOnInit() {

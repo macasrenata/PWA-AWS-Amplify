@@ -1,0 +1,15 @@
+{
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-angularpwapostone-develop-175514-authRole",
+            "UnauthRoleArn": "arn:aws:iam::882551447975:role/amplify-angularpwapostone-develop-175514-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::882551447975:role/amplify-angularpwapostone-develop-175514-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-angularpwapostone-develop-175514-deployment",
+            "UnauthRoleName": "amplify-angularpwapostone-develop-175514-unauthRole",
+            "StackName": "amplify-angularpwapostone-develop-175514",
+            "StackId": "arn:aws:cloudformation:us-east-1:882551447975:stack/amplify-angularpwapostone-develop-175514/cc6a5bb0-2d99-11ea-bb7f-121b58656156",
+            "AmplifyAppId": "dn72qxg8vho1u"
+        }
+    }
+}
